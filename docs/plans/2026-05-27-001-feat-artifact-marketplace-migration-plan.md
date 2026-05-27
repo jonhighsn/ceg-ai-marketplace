@@ -1,7 +1,7 @@
 ---
 title: "feat: Migrate Claude artifact into CEG AI Marketplace"
 type: feat
-status: active
+status: completed
 date: 2026-05-27
 ---
 
