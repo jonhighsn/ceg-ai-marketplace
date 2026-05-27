@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import PageIdeaPortal from '../src/pages/PageIdeaPortal'
 
 const ideas = [
@@ -48,16 +48,15 @@ describe('PageIdeaPortal', () => {
     expect(screen.getByText('3')).toBeInTheDocument()
   })
 
-  it('shows an AI-unavailable state when discovery search fails', async () => {
-    vi.stubGlobal('fetch', vi.fn(() => Promise.reject(new Error('CORS'))))
+  it('shows no-results state when Fuse search finds no match in discovery', async () => {
     render(<PageIdeaPortal ideas={ideas} tiles={[]} />)
 
     fireEvent.click(screen.getByText('Submit New Idea'))
-    fireEvent.change(screen.getByPlaceholderText(/Auto-generate a QBR deck/), {
-      target: { value: 'Need a QBR assistant' },
+    fireEvent.change(screen.getByPlaceholderText(/QBR|account data|automation/), {
+      target: { value: 'zzzznonexistent' },
     })
     fireEvent.click(screen.getByLabelText('Check Catalog →'))
 
-    expect(await screen.findByText(/AI search is not available/)).toBeInTheDocument()
+    expect(await screen.findByText(/Nothing in the catalog covers this yet/)).toBeInTheDocument()
   })
 })
