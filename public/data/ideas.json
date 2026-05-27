@@ -1,0 +1,72 @@
+[
+  {
+    "id": "pipeline-1",
+    "title": "Pre-Interlock Intelligence Agent",
+    "problem": "Automatically generates a structured account brief when a CSM receives a new account assignment, pulling from Account Plan, Dynamics, Surf, and Customer Dashboard. Delivered directly in CSP before the Interlock, without any manual research.",
+    "category": "Account Intelligence",
+    "status": "committed"
+  },
+  {
+    "id": "pipeline-2",
+    "title": "QIR Research Agent",
+    "problem": "Auto-generates a comprehensive QIR brief inside CSP by pulling health scores, adoption data, value reports, product metrics, and historical customer context from multiple systems into a single ready-to-use artifact. The CSM can review, adjust, and ask follow-up questions via conversational AI before the meeting.",
+    "category": "Account Intelligence",
+    "status": "committed"
+  },
+  {
+    "id": "pipeline-3",
+    "title": "Post-Meeting Synthesis + Email Management Agent",
+    "problem": "Listens to every customer meeting and automatically generates internal summaries, customer-facing recaps, structured action items, and CSP touchpoints from the raw transcript. Selected customer emails can also be brought into CSP as logged touchpoints.",
+    "category": "Account Intelligence",
+    "status": "committed"
+  },
+  {
+    "id": "pipeline-4",
+    "title": "Resource Connection Agent",
+    "problem": "Enables CSMs to search across all ServiceNow content sources (Best Practices, SNU, Community, AI Agent Gallery) from a single panel inside CSP and receive cited, customer-ready answers. When digital content isn't sufficient, it routes the request to the right internal expert through a structured workflow with tracking and resolution logging.",
+    "category": "Knowledge",
+    "status": "committed"
+  },
+  {
+    "id": "pipeline-5",
+    "title": "Portfolio Intelligence Agent",
+    "problem": "Aggregates escalations, system-generated risk signals, scheduled tasks, and inbound customer outreach into a single ranked action feed on the CSM's landing page. The feed continuously re-ranks accounts and refreshes recommended next-best actions as new signals arrive.",
+    "category": "Risk Management",
+    "status": "committed"
+  },
+  {
+    "id": "pipeline-6",
+    "title": "Scheduling Automation Agent",
+    "problem": "Automates meeting coordination across Teams and Zoom by reading account context, identifying the right stakeholders, and surfacing available times across the group. Handles recurring ceremony setup, rules-based triggers, customer self-scheduling links, and automatic availability refresh if no response is received.",
+    "category": "Account Intelligence",
+    "status": "committed"
+  },
+  {
+    "id": "pipeline-7",
+    "title": "CRIR Risk Mitigation Plan Agent",
+    "problem": "Automatically enriches each incoming CRIR risk record with a draft mitigation plan containing a risk summary, root cause hypothesis, prioritised next-best actions, suggested owners, and links to relevant accelerators. The CSM reviews, adjusts, and activates the plan directly from the risk record.",
+    "category": "Risk Management",
+    "status": "committed"
+  },
+  {
+    "id": "pipeline-8",
+    "title": "Value Realization Agent",
+    "problem": "Auto-generates a Value Blueprint for each customer based on their entitlements and business outcomes, and produces a quarterly Value Outcome Review tracking progress against the blueprint with next-best action recommendations. Both are generated automatically at assignment and at QIR time respectively, and are available on demand.",
+    "category": "Value & Adoption",
+    "status": "committed"
+  },
+  {
+    "id": "pipeline-9",
+    "title": "Support Intelligence Agent",
+    "problem": "Automatically surfaces active support cases, critical escalations, and recurring problem trends across a CSM's account portfolio in their workspace. Delivers proactive P1/P2 alerts and pre-meeting support summaries before every customer-facing call.",
+    "category": "Risk Management",
+    "status": "committed"
+  },
+  {
+    "id": "pipeline-10",
+    "title": "Product Adoption Roadmap Agent",
+    "problem": "Generates a personalised adoption roadmap pre-populated with proven sequencing and milestones based on the customer's entitlements, business objectives, and industry context. The roadmap spans the customer's full ServiceNow product footprint and is available for CSM review and adjustment before any adoption conversation.",
+    "category": "Value & Adoption",
+    "status": "committed"
+  }
+]
