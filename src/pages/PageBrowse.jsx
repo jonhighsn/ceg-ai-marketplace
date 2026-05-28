@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { B, TYPE_META } from '../constants'
-import { filterCatalogByQuery, sortCatalogTiles } from '../helpers'
+import { filterCatalogByQuery, groupTilesByCategory, sortCatalogTiles } from '../helpers'
 import { TileCard } from '../components/TileCard'
 import { TileModal } from '../components/TileModal'
 
@@ -16,6 +16,8 @@ const PageBrowse = ({ tiles = [] }) => {
     const bySearch = filterCatalogByQuery(byType, searchQuery);
     return sortCatalogTiles(bySearch);
   }, [tiles, typeFilter, searchQuery]);
+
+  const grouped = useMemo(() => groupTilesByCategory(filtered), [filtered]);
 
   const typeCounts = useMemo(() => {
     return Object.fromEntries(CATALOG_TYPES.map(t => [t, t === "all" ? tiles.length :
@@ -64,8 +66,19 @@ const PageBrowse = ({ tiles = [] }) => {
 
       {/* Tile grid */}
       {filtered.length > 0 ? (
-        <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:14}}>
-          {filtered.map(t => <TileCard key={t.id} tile={t} onSelect={setSelectedTile} />)}
+        <div>
+          {grouped.map(({ category, tiles: catTiles }) => (
+            <div key={category} style={{marginBottom:20}}>
+              <div style={{fontSize:13, fontWeight:700, color:B.snGreen, letterSpacing:"0.5px",
+                textTransform:"uppercase", marginBottom:10, paddingBottom:6,
+                borderBottom:`1px solid ${B.border}`}}>
+                {category}
+              </div>
+              <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:14}}>
+                {catTiles.map(t => <TileCard key={t.id} tile={t} onSelect={setSelectedTile} />)}
+              </div>
+            </div>
+          ))}
         </div>
       ) : (
         <div style={{textAlign:"center", padding:"40px 20px",
