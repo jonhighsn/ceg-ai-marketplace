@@ -58,6 +58,47 @@ describe('searchMarketplace', () => {
     expect(results.ideas[0].id).toBe('pipeline-1')
   })
 
+  it('drops weak semantic-only matches instead of returning the whole catalog', async () => {
+    const manyTiles = Array.from({ length: 20 }, (_, index) => ({
+      id: `weak-${index}`,
+      name: `Weak ${index}`,
+      desc: 'Unrelated capability',
+      useCase: 'Unrelated work',
+      cat: 'Other',
+    }))
+
+    const results = await searchMarketplace({
+      tiles: [
+        {
+          id: 'qir-generator',
+          name: 'QIR Generator',
+          desc: 'Builds QIR research briefs',
+          useCase: 'Prepare QIR research',
+          cat: 'Account Intelligence',
+        },
+        ...manyTiles,
+      ],
+      ideas,
+      query: 'QIR Research',
+      semanticIndex: {
+        available: true,
+        entries: [
+          { id: 'qir-generator', kind: 'tile', embedding: [1, 0] },
+          ...manyTiles.map((tile, index) => ({
+            id: tile.id,
+            kind: 'tile',
+            embedding: [0.2 - (index * 0.001), 0.98],
+          })),
+          { id: 'pipeline-1', kind: 'idea', embedding: [1, 0] },
+        ],
+      },
+      embedQuery: async () => [1, 0],
+    })
+
+    expect(results.tiles.map(tile => tile.id)).toEqual(['qir-generator'])
+    expect(results.ideas.map(idea => idea.id)).toEqual(['pipeline-1'])
+  })
+
   it('falls back to keyword results when semantic search is unavailable', async () => {
     const results = await searchMarketplace({
       tiles,

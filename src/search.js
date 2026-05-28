@@ -17,6 +17,9 @@ const IDEA_KEYS = [
   { name: 'id', weight: 0.15 },
 ]
 
+const MAX_RESULTS_PER_GROUP = 6
+const MIN_SEMANTIC_ONLY_SCORE = 0.34
+
 const TILE_BY_ID = (tiles) => new Map(tiles.map(tile => [tile.id, tile]))
 const IDEA_BY_ID = (ideas) => new Map(ideas.map(idea => [idea.id, idea]))
 
@@ -82,6 +85,10 @@ const blendResults = ({ semanticResults = [], keywordResults = [], itemById, kin
   })
 
   return [...merged.values()]
+    .filter(result =>
+      result.keywordScore !== undefined ||
+      (result.semanticScore ?? 0) >= MIN_SEMANTIC_ONLY_SCORE
+    )
     .map(result => {
       const semanticSignal = Math.max(0, result.semanticScore ?? 0)
       const keywordSignal = result.keywordScore === undefined ? 0 : Math.max(0, 1 - result.keywordScore)
@@ -111,6 +118,7 @@ const blendResults = ({ semanticResults = [], keywordResults = [], itemById, kin
       b.match.blendedScore - a.match.blendedScore ||
       (a.name || a.title || '').localeCompare(b.name || b.title || '')
     )
+    .slice(0, MAX_RESULTS_PER_GROUP)
 }
 
 export const searchTiles = (tiles, query) => {
