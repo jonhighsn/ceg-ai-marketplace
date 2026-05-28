@@ -41,7 +41,7 @@ const PageHome = ({ tiles = [], ideas = [] }) => {
         eyebrow="CEG AI Marketplace"
         heading="What do you need to do today?"
         helperLines={[
-          {text:"Search the catalog and pipeline by keyword.", opacity:0.6},
+          {text:"Discover AI tools, find the right skill for any task, see what's possible for your accounts — or contribute your own use case.", opacity:0.6},
         ]}
         placeholder="e.g. QBR, account intelligence, automation..."
         value={query}
