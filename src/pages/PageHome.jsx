@@ -59,7 +59,7 @@ const PageHome = ({ tiles = [], ideas = [] }) => {
 
       {/* Search results */}
       {results !== null && (
-        <div style={{marginBottom:24}}>
+        <div style={{marginBottom:24, animation:"resultEnter 0.3s cubic-bezier(0.22,1,0.36,1) both"}}>
           {hasResults ? (
             <div style={{display:"flex", flexDirection:"column", gap:8}}>
               <div style={{fontSize:11, fontWeight:700, letterSpacing:"1px",
@@ -75,9 +75,10 @@ const PageHome = ({ tiles = [], ideas = [] }) => {
                     Live Catalog
                   </div>
                   <div style={{display:"flex", flexDirection:"column", gap:8}}>
-                    {matchedTiles.map(t => (
+                    {matchedTiles.map((t, idx) => (
                       <div key={t.id} onClick={() => setSelectedTile(t)}
-                        style={{background:B.white, border:`1px solid ${B.border}`, borderRadius:8,
+                        style={{animation:`resultEnter 0.3s cubic-bezier(0.22,1,0.36,1) ${idx * 60}ms both`,
+                          background:B.white, border:`1px solid ${B.border}`, borderRadius:8,
                           padding:"12px 16px", cursor:"pointer", display:"flex", gap:12, alignItems:"flex-start"}}
                         onMouseEnter={e => e.currentTarget.style.borderColor = B.snGreen}
                         onMouseLeave={e => e.currentTarget.style.borderColor = B.border}>
@@ -110,10 +111,11 @@ const PageHome = ({ tiles = [], ideas = [] }) => {
                     Pipeline
                   </div>
                   <div style={{display:"flex", flexDirection:"column", gap:8}}>
-                    {matchedIdeas.map(i => (
+                    {matchedIdeas.map((i, idx) => (
                       <div key={i.id}
                         onClick={() => window.dispatchEvent(new CustomEvent("storefront:nav", {detail:"submit"}))}
-                        style={{background:B.white, border:`1px solid ${B.border}`, borderRadius:8,
+                        style={{animation:`resultEnter 0.3s cubic-bezier(0.22,1,0.36,1) ${(matchedTiles.length + idx) * 60}ms both`,
+                          background:B.white, border:`1px solid ${B.border}`, borderRadius:8,
                           padding:"12px 16px", cursor:"pointer", display:"flex", gap:12, alignItems:"flex-start"}}
                         onMouseEnter={e => e.currentTarget.style.borderColor = "#d97706"}
                         onMouseLeave={e => e.currentTarget.style.borderColor = B.border}>

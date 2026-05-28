@@ -56,27 +56,25 @@ export const TilePanel = ({ tile, onClose }) => {
           {/* Body */}
           <div style={{padding: "20px 24px", overflowY: "auto", flex: 1}}>
             <SubLabel>What it does</SubLabel>
-            <div style={{fontSize: 14, color: B.muted, lineHeight: 1.65, marginBottom: 24}}>{tile.desc}</div>
+            <div style={{fontSize: 14, color: B.muted, lineHeight: 1.6, marginBottom: 24}}>{tile.desc}</div>
 
             <SubLabel>When to use it</SubLabel>
-            <div style={{fontSize: 14, color: B.muted, lineHeight: 1.65, marginBottom: 24,
-              background: B.wasabiBg, padding: "10px 14px", borderRadius: 6,
-              borderLeft: `3px solid ${B.wasabi}`}}>{tile.useCase}</div>
+            <div style={{fontSize: 14, color: B.muted, lineHeight: 1.6, marginBottom: 24}}>{tile.useCase}</div>
 
             {(tile.type === "enterprise-skill" || tile.type === "local-skill") && tile.triggers && available && (
               <>
                 <SubLabel>How to activate</SubLabel>
                 {tile.type === "enterprise-skill" && (
-                  <div style={{fontSize: 13, color: B.muted, marginBottom: 10}}>
+                  <div style={{fontSize: 14, color: B.muted, lineHeight: 1.6, marginBottom: 16}}>
                     Pre-loaded for all CEG users. Just type any trigger phrase in Claude:
                   </div>
                 )}
                 {tile.type === "local-skill" && (
-                  <div style={{fontSize: 13, color: B.muted, marginBottom: 10}}>
+                  <div style={{fontSize: 14, color: B.muted, lineHeight: 1.6, marginBottom: 16}}>
                     Download the skill file from SharePoint, install via Claude Settings, then use a trigger:
                   </div>
                 )}
-                <div style={{display: "flex", flexDirection: "column", gap: 6, marginBottom: 16}}>
+                <div style={{display: "flex", flexDirection: "column", gap: 6, marginBottom: 24}}>
                   {tile.triggers.map(t => (
                     <div key={t} onClick={() => copyTrigger(t)}
                       style={{display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -105,7 +103,7 @@ export const TilePanel = ({ tile, onClose }) => {
             {tile.type === "in-platform" && tile.url && available && (
               <>
                 <SubLabel>Where to find it</SubLabel>
-                <div style={{fontSize: 13, color: B.muted, marginBottom: 12}}>
+                <div style={{fontSize: 14, color: B.muted, lineHeight: 1.6, marginBottom: 16}}>
                   Available directly within the CSP platform. No separate installation required.
                 </div>
                 <a href={tile.url} target="_blank" rel="noreferrer"
@@ -120,7 +118,7 @@ export const TilePanel = ({ tile, onClose }) => {
             {tile.type === "automated" && available && (
               <>
                 <SubLabel>How it works</SubLabel>
-                <div style={{fontSize: 13, color: B.muted, lineHeight: 1.65, marginBottom: 12}}>
+                <div style={{fontSize: 14, color: B.muted, lineHeight: 1.6, marginBottom: 16}}>
                   This workflow runs automatically — no action needed from you.
                   Contact CEG Strategic Operations to confirm you're on the distribution list.
                 </div>

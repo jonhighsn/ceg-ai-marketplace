@@ -117,3 +117,29 @@ select:focus-visible {
     to { transform: translateY(0); }
   }
 }
+
+/* Search loading experience */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scanPulse {
+  0%, 100% { opacity: 0.3; transform: scaleX(0); transform-origin: left; }
+  50% { opacity: 1; transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes sparkleDrift {
+  0% { transform: rotate(0deg) scale(1); opacity: 0.18; }
+  50% { transform: rotate(12deg) scale(1.15); opacity: 0.35; }
+  100% { transform: rotate(0deg) scale(1); opacity: 0.18; }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@keyframes resultEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
