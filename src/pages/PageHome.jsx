@@ -56,11 +56,7 @@ const PageHome = ({ tiles = [], ideas = [] }) => {
 
       {/* Hero search */}
       <SNSearchCard
-        eyebrow="CEG AI Marketplace"
         heading="What do you need to do today?"
-        helperLines={[
-          {text:"Discover AI tools, find the right skill for any task, see what's possible for your accounts — or contribute your own use case.", opacity:0.6},
-        ]}
         placeholder="e.g. QBR, account intelligence, automation..."
         value={query}
         onChange={e => {

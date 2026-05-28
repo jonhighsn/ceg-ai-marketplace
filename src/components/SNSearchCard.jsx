@@ -89,7 +89,7 @@ export const SNSearchCard = ({
         <div style={{
           background:"rgba(255,255,255,0.96)",
           borderRadius:14,
-          padding:"14px 16px 12px",
+          padding:"10px 16px 10px",
           boxShadow: focused
             ? `0 0 0 2px ${B.wasabi}, 0 8px 32px rgba(0,0,0,0.18)`
             : "0 4px 24px rgba(0,0,0,0.18)",
@@ -117,7 +117,7 @@ export const SNSearchCard = ({
             onBlur={() => setFocused(false)}
             onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey && !loading) { e.preventDefault(); onSubmit(); } }}
             placeholder={placeholder}
-            rows={2}
+            rows={1}
             readOnly={loading}
             style={{
               width:"100%", background:"transparent", border:"none",
