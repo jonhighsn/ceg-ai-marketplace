@@ -4,7 +4,7 @@ import { searchMarketplace } from '../search'
 import { SNSearchCard } from '../components/SNSearchCard'
 import { SubLabel } from '../components/SubLabel'
 import { TileCard } from '../components/TileCard'
-import { TileModal } from '../components/TileModal'
+import { TilePanel } from '../components/TilePanel'
 import { TagPill } from '../components/TagPill'
 
 const PageHome = ({ tiles = [], ideas = [] }) => {
@@ -151,17 +151,24 @@ const PageHome = ({ tiles = [], ideas = [] }) => {
         </div>
       )}
 
-      {/* Featured tiles */}
-      <div style={{marginBottom:8}}>
-        <SubLabel>In-Platform Capabilities</SubLabel>
+      {/* Featured tiles + detail panel */}
+      <div className="detail-panel-container">
+        <div className="detail-panel-grid">
+          <div style={{marginBottom:8}}>
+            <SubLabel>In-Platform Capabilities</SubLabel>
+          </div>
+          <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:14}}>
+            {featuredTiles.map(t => (
+              <TileCard key={t.id} tile={t} onSelect={setSelectedTile} />
+            ))}
+          </div>
+        </div>
+        {selectedTile && (
+          <div className="detail-panel-enter">
+            <TilePanel tile={selectedTile} onClose={() => setSelectedTile(null)} />
+          </div>
+        )}
       </div>
-      <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:14}}>
-        {featuredTiles.map(t => (
-          <TileCard key={t.id} tile={t} onSelect={setSelectedTile} />
-        ))}
-      </div>
-
-      {selectedTile && <TileModal tile={selectedTile} onClose={() => setSelectedTile(null)} />}
     </div>
   );
 };

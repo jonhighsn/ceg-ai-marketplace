@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { B, SUBMIT_FORM_URL, TYPE_META } from '../../constants'
 import { searchMarketplace } from '../../search'
 import { SNSearchCard } from '../../components/SNSearchCard'
-import { TileModal } from '../../components/TileModal'
+import { TilePanel } from '../../components/TilePanel'
 
 const DiscoverySubmit = ({ tiles = [], ideas = [] }) => {
   const [query, setQuery] = useState("");
@@ -140,7 +140,7 @@ const DiscoverySubmit = ({ tiles = [], ideas = [] }) => {
         </div>
       )}
 
-      {selectedTile && <TileModal tile={selectedTile} onClose={() => setSelectedTile(null)} />}
+      {selectedTile && <TilePanel tile={selectedTile} onClose={() => setSelectedTile(null)} />}
     </div>
   );
 };
