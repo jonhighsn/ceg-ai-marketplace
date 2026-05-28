@@ -1,39 +1,25 @@
-import { useEffect, useState } from 'react'
-import {
-  STORAGE_CATALOG_KEY,
-  STORAGE_IDEAS_SEEDED_KEY,
-} from './constants'
-import { IDEAS_FALLBACK, TILES_FALLBACK } from './data-fallback'
-import storage from './storage'
+import { useEffect, useRef, useState } from 'react'
+import { CATALOG_FALLBACK } from './data-fallback'
+import { DATA_RAW_URL } from './constants'
 import { Sidebar } from './components/Sidebar'
 import PageAdmin from './pages/PageAdmin'
 import PageBrowse from './pages/PageBrowse'
 import PageHome from './pages/PageHome'
 import PageIdeaPortal from './pages/PageIdeaPortal'
 
-const DATA_BASE = import.meta.env.BASE_URL
+const POLL_INTERVAL = 30 * 60 * 1000
 
 const isUsableArray = (value) => Array.isArray(value) && value.length > 0
 
-const fetchJsonArray = async (path, fallback) => {
+async function fetchCatalog() {
   try {
-    const response = await fetch(`${DATA_BASE}${path}`)
-    if (!response.ok) return fallback
+    const response = await fetch(DATA_RAW_URL)
+    if (!response.ok) return null
 
     const payload = await response.json()
-    return isUsableArray(payload) ? payload : fallback
-  } catch {
-    return fallback
-  }
-}
+    if (!payload || !isUsableArray(payload.tiles)) return null
 
-const loadStoredArray = async (key) => {
-  try {
-    const record = await storage.get(key, true)
-    if (!record?.value) return null
-
-    const parsed = JSON.parse(record.value)
-    return isUsableArray(parsed) ? parsed : null
+    return payload
   } catch {
     return null
   }
@@ -44,31 +30,41 @@ export default function App() {
   const [liveTiles, setLiveTiles] = useState([])
   const [liveIdeas, setLiveIdeas] = useState([])
   const [dataLoaded, setDataLoaded] = useState(false)
+  const versionRef = useRef(null)
 
   useEffect(() => {
     let cancelled = false
 
     ;(async () => {
-      const [fetchedTiles, fetchedIdeas] = await Promise.all([
-        fetchJsonArray('data/tiles.json', TILES_FALLBACK),
-        fetchJsonArray('data/ideas.json', IDEAS_FALLBACK),
-      ])
-
-      const [storedTiles, storedIdeas] = await Promise.all([
-        loadStoredArray(STORAGE_CATALOG_KEY),
-        loadStoredArray(STORAGE_IDEAS_SEEDED_KEY),
-      ])
+      const catalog = await fetchCatalog()
 
       if (!cancelled) {
-        setLiveTiles(storedTiles ?? fetchedTiles)
-        setLiveIdeas(storedIdeas ?? fetchedIdeas)
+        if (catalog) {
+          versionRef.current = catalog.version
+          setLiveTiles(catalog.tiles)
+          setLiveIdeas(catalog.ideas || [])
+        } else {
+          setLiveTiles(CATALOG_FALLBACK.tiles)
+          setLiveIdeas(CATALOG_FALLBACK.ideas)
+        }
         setDataLoaded(true)
       }
     })()
 
-    return () => {
-      cancelled = true
-    }
+    return () => { cancelled = true }
+  }, [])
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const catalog = await fetchCatalog()
+      if (catalog && catalog.version !== versionRef.current) {
+        versionRef.current = catalog.version
+        setLiveTiles(catalog.tiles)
+        setLiveIdeas(catalog.ideas || [])
+      }
+    }, POLL_INTERVAL)
+
+    return () => clearInterval(interval)
   }, [])
 
   useEffect(() => {

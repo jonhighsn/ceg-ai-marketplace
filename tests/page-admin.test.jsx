@@ -45,8 +45,23 @@ describe('PageAdmin', () => {
     expect(screen.getByText('Update Catalog')).toBeInTheDocument()
   })
 
-  it('previews and applies valid catalog JSON', async () => {
+  it('previews and applies valid catalog JSON via GitHub API', async () => {
     const onCatalogUpdate = vi.fn()
+
+    // Mock GitHub PAT in localStorage
+    localStorage.setItem('storefront:github-pat', 'test-token')
+
+    // Mock the GitHub Contents API PUT
+    vi.stubGlobal('fetch', vi.fn((url, opts) => {
+      if (url.includes('api.github.com') && opts?.method === 'PUT') {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ content: { sha: 'new-sha-123' } }),
+        })
+      }
+      return Promise.resolve({ ok: false })
+    }))
+
     render(<PageAdmin liveTiles={liveTiles} liveIdeas={liveIdeas} onCatalogUpdate={onCatalogUpdate} onIdeasUpdate={vi.fn()} />)
 
     fireEvent.change(screen.getByPlaceholderText('Passcode'), { target: { value: 'ceg2026' } })
@@ -72,7 +87,6 @@ describe('PageAdmin', () => {
     await waitFor(() => {
       expect(onCatalogUpdate).toHaveBeenCalledWith(nextTiles)
     })
-    expect(JSON.parse(localStorage.getItem('storefront:catalog-override'))).toEqual(nextTiles)
   })
 
   it('rejects invalid catalog JSON without applying it', () => {

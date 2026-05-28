@@ -15,6 +15,13 @@ export const STORAGE_VOTES_KEY = 'storefront:idea-votes'
 export const STORAGE_USER_VOTES_KEY = 'storefront:user-votes'
 export const CSP_URL = "https://success.servicenow.com/now/cwf/agent/home"
 export const STORAGE_IDEAS_SEEDED_KEY = 'storefront:ideas-seeded-override'
+export const REPO_OWNER = 'jonhighsn'
+export const REPO_NAME = 'ceg-ai-marketplace'
+export const DATA_BRANCH = 'data'
+export const DATA_RAW_URL = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${DATA_BRANCH}/catalog.json`
+export const GITHUB_API_BASE = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`
+export const STORAGE_GITHUB_PAT_KEY = 'storefront:github-pat'
+export const STORAGE_CATALOG_SHA_KEY = 'storefront:catalog-sha'
 export const SUBMIT_FORM_URL = "https://my.servicenow.com/esc?id=service_catalog&spa=1&sc_catalog=c95aaa98dba5cb4487e977c9bf96196f,cac30a4ddb6497403d7958a8dc961930,0ec1a76347332100158b949b6c9a7102,efd64078db9d1300b2e2d34b5e96194e,3e75ccbcdb5d1300b2e2d34b5e9619a6,42c07a15db951700b2e2d34b5e9619f1,0c0369b4db555300b2e2d34b5e9619fe,118448b4db9d1300b2e2d34b5e961902,1b8e663adb59d700e65cf7441d961965,706540f4db9d1300b2e2d34b5e961919,a17688b4db9d1300b2e2d34b5e961906,8994ca1ddbfceb80426ec170ba961944,32e6f66fdb8284501e4d5ad3ca9619ed,0bbdfdf91b5b5410e04565302a4bcb9a,a929c32f1ba0245052afc956624bcb22,32d6f100dbc56050f36213e8139619da,e0d08b13c3330100c8b837659bba8fb4,79022366c38e6910953ba6bc7a0131a9,4c82a476c3694250b40cedbeb001314f,9a9e75f91b124210828f21b0604bcb97&sc_category=undefined&sc_cat_item=8eb839a2476032106bc48fbdd46d4303"
 
 export const TYPE_META = {
