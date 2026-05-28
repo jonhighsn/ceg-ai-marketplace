@@ -1,7 +1,7 @@
 import { B, SKILL_REPO_URL } from '../constants'
 
 const NAV = [
-  {id:"home",  icon:"🏠", label:"Home"},
+  {id:"home",  icon:"🏠", label:"Overview"},
   {id:"browse",icon:"🗂",  label:"Browse Catalog"},
   {id:"submit",icon:"🚀", label:"Pipeline"},
 ];

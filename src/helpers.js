@@ -28,3 +28,15 @@ export const parseUnifiedSearch = (text) => {
     };
   } catch { return { catalog: [], ideas: [] }; }
 };
+
+export const groupTilesByCategory = (tiles) => {
+  const map = new Map();
+  for (const t of tiles) {
+    const cat = t.cat || "Other";
+    if (!map.has(cat)) map.set(cat, []);
+    map.get(cat).push(t);
+  }
+  return [...map.entries()]
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([category, tiles]) => ({ category, tiles }));
+};
