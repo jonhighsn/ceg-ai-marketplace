@@ -1,8 +1,8 @@
 [
   {
     "id": "pipeline-1",
-    "title": "Pre-Interlock Intelligence Agent",
-    "problem": "Automatically generates a structured account brief when a CSM receives a new account assignment, pulling from Account Plan, Dynamics, Surf, and Customer Dashboard. Delivered directly in CSP before the Interlock, without any manual research.",
+    "title": "Pre-Interlock Intelligence Agent — Account Handoff Brief",
+    "problem": "Generates a handoff brief and structured account brief when a CSM receives a new account assignment. Pulls from Account Plan, Dynamics, Surf, and Customer Dashboard. Delivered directly in CSP before the Interlock, without any manual research. Use for sales-to-post-sale transitions, new account onboarding, and interlock preparation.",
     "category": "Account Intelligence",
     "status": "committed"
   },
@@ -23,7 +23,7 @@
   {
     "id": "pipeline-4",
     "title": "Resource Connection Agent",
-    "problem": "Enables CSMs to search across all ServiceNow content sources (Best Practices, SNU, Community, AI Agent Gallery) from a single panel inside CSP and receive cited, customer-ready answers. When digital content isn't sufficient, it routes the request to the right internal expert through a structured workflow with tracking and resolution logging.",
+    "problem": "Enables CSMs to search across all ServiceNow content sources (Best Practices, SNU, Community, AI Agent Gallery) from a single panel inside CSP and receive cited, customer-ready answers. Functions as an expert chatbot and knowledge base for implementation guidance and best practices. When digital content isn't sufficient, it routes the request to the right internal expert through a structured workflow with tracking and resolution logging.",
     "category": "Knowledge",
     "status": "committed"
   },
@@ -65,7 +65,7 @@
   {
     "id": "pipeline-10",
     "title": "Product Adoption Roadmap Agent",
-    "problem": "Generates a personalised adoption roadmap pre-populated with proven sequencing and milestones based on the customer's entitlements, business objectives, and industry context. The roadmap spans the customer's full ServiceNow product footprint and is available for CSM review and adjustment before any adoption conversation.",
+    "problem": "Generates a personalised adoption roadmap pre-populated with proven sequencing and milestones based on the customer's entitlements, business objectives, and industry context. Identifies adoption gaps and unused licenses to surface undeployed products. The roadmap spans the customer's full ServiceNow product footprint and is available for CSM review and adjustment before any adoption conversation.",
     "category": "Value & Adoption",
     "status": "committed"
   }

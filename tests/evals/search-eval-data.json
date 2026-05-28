@@ -1,0 +1,358 @@
+[
+  {
+    "id": "eval-001",
+    "query": "renewal",
+    "queryType": "keyword",
+    "expectedTiles": ["ai-renewal-intelligence", "csp-renewal-package-generator"],
+    "expectedIdeas": [],
+    "notes": "Direct keyword match for renewal-related capabilities"
+  },
+  {
+    "id": "eval-002",
+    "query": "help me prepare for a renewal conversation with my customer",
+    "queryType": "natural-language",
+    "expectedTiles": ["ai-renewal-intelligence", "ai-coach-engage-meeting-prep"],
+    "expectedIdeas": [],
+    "notes": "Natural language renewal prep — should surface renewal advisor and meeting prep"
+  },
+  {
+    "id": "eval-003",
+    "query": "I need a handoff brief for a new account",
+    "queryType": "natural-language",
+    "expectedTiles": ["sales-to-post-sale-brief", "csp-ask-ai-handoff-brief"],
+    "expectedIdeas": ["pipeline-1"],
+    "notes": "Handoff context — keyword 'brief' and 'handoff' should match"
+  },
+  {
+    "id": "eval-004",
+    "query": "account health and intelligence",
+    "queryType": "keyword",
+    "expectedTiles": ["account-command-center", "csp-ask-ai-exec-summary"],
+    "expectedIdeas": ["pipeline-2"],
+    "notes": "Account health — command center and exec summary both match"
+  },
+  {
+    "id": "eval-005",
+    "query": "contact engagement profile",
+    "queryType": "keyword",
+    "expectedTiles": ["contact-intelligence-profile"],
+    "expectedIdeas": [],
+    "notes": "Contact engagement — direct trigger match"
+  },
+  {
+    "id": "eval-006",
+    "query": "Now Assist adoption",
+    "queryType": "keyword",
+    "expectedTiles": ["ai-adoption-advisor", "csp-ask-ai-adoption-advisor"],
+    "expectedIdeas": [],
+    "notes": "Now Assist / AI adoption — both enterprise and CSP advisors"
+  },
+  {
+    "id": "eval-007",
+    "query": "AI adoption maturity assessment",
+    "queryType": "keyword",
+    "expectedTiles": ["ai-adoption-advisor", "csp-ask-ai-adoption-advisor", "csp-ask-ai-value-adoption-plan"],
+    "expectedIdeas": ["pipeline-8", "pipeline-10"],
+    "notes": "AI adoption gap — keyword hits on adoption advisor tiles"
+  },
+  {
+    "id": "eval-008",
+    "query": "business case BVA value narrative",
+    "queryType": "keyword",
+    "expectedTiles": ["value-melody-coach", "value-melody-analyst"],
+    "expectedIdeas": ["pipeline-8"],
+    "notes": "Business case / BVA — value melody triggers + value realization"
+  },
+  {
+    "id": "eval-009",
+    "query": "QIR research brief",
+    "queryType": "keyword",
+    "expectedTiles": [],
+    "expectedIdeas": ["pipeline-2"],
+    "notes": "QIR research — pipeline-2 has 'QIR brief' in description"
+  },
+  {
+    "id": "eval-010",
+    "query": "meeting scheduling automation",
+    "queryType": "keyword",
+    "expectedTiles": [],
+    "expectedIdeas": ["pipeline-6"],
+    "notes": "Scheduling automation — pipeline-6 has 'meeting coordination' and 'scheduling'"
+  },
+  {
+    "id": "eval-011",
+    "query": "risk mitigation escalations",
+    "queryType": "keyword",
+    "expectedTiles": [],
+    "expectedIdeas": ["pipeline-5", "pipeline-7", "pipeline-9"],
+    "notes": "Risk / escalations — pipeline-7 has 'risk mitigation', pipeline-5/9 have 'escalations'"
+  },
+  {
+    "id": "eval-012",
+    "query": "create a presentation",
+    "queryType": "keyword",
+    "expectedTiles": ["servicenow-corporate-pptx", "ceg-servicenow-pptx"],
+    "expectedIdeas": [],
+    "notes": "Presentation creation — 'presentation' trigger on corporate PPTX"
+  },
+  {
+    "id": "eval-013",
+    "query": "write a memo",
+    "queryType": "keyword",
+    "expectedTiles": ["smart-brevity-docx"],
+    "expectedIdeas": [],
+    "notes": "Document creation — 'memo' trigger on smart brevity"
+  },
+  {
+    "id": "eval-014",
+    "query": "brand colors and fonts",
+    "queryType": "keyword",
+    "expectedTiles": ["servicenow-brand-standards-reference", "html-artifact-brand-skill-v1"],
+    "expectedIdeas": [],
+    "notes": "Brand standards — 'brand colors' and 'fonts' triggers"
+  },
+  {
+    "id": "eval-015",
+    "query": "territory planning",
+    "queryType": "keyword",
+    "expectedTiles": ["ai-coach-plan-territory-planning"],
+    "expectedIdeas": [],
+    "notes": "Territory planning — direct match"
+  },
+  {
+    "id": "eval-016",
+    "query": "pipeline momentum deal review",
+    "queryType": "keyword",
+    "expectedTiles": ["weekly-momentum-checklist", "deal-review-prep"],
+    "expectedIdeas": [],
+    "notes": "Pipeline/deal review — momentum and deal review triggers"
+  },
+  {
+    "id": "eval-017",
+    "query": "support cases P1 P2 alerts",
+    "queryType": "keyword",
+    "expectedTiles": [],
+    "expectedIdeas": ["pipeline-9"],
+    "notes": "Support case analysis — pipeline-9 has 'support cases', 'P1/P2'"
+  },
+  {
+    "id": "eval-018",
+    "query": "knowledge search expert guidance",
+    "queryType": "keyword",
+    "expectedTiles": ["es-genius"],
+    "expectedIdeas": ["pipeline-4"],
+    "notes": "Knowledge search — ES Genius has 'expert' and pipeline-4 has 'search across'"
+  },
+  {
+    "id": "eval-019",
+    "query": "adoption gaps unused licenses",
+    "queryType": "keyword",
+    "expectedTiles": ["csp-ask-ai-adoption-gaps"],
+    "expectedIdeas": ["pipeline-10"],
+    "notes": "Adoption gaps — CSP adoption gaps has 'unused licensed'"
+  },
+  {
+    "id": "eval-020",
+    "query": "customer dashboard asset generator documentation",
+    "queryType": "keyword",
+    "expectedTiles": ["customer-dashboard-asset-generator"],
+    "expectedIdeas": [],
+    "notes": "Asset generation — direct name/desc match"
+  },
+  {
+    "id": "eval-021",
+    "query": "new account handoff onboarding",
+    "queryType": "keyword",
+    "expectedTiles": ["sales-to-post-sale-brief", "csp-ask-ai-handoff-brief", "account-command-center"],
+    "expectedIdeas": ["pipeline-1"],
+    "notes": "New account onboarding — handoff brief, account brief triggers"
+  },
+  {
+    "id": "eval-022",
+    "query": "post-meeting synthesis action items",
+    "queryType": "keyword",
+    "expectedTiles": [],
+    "expectedIdeas": ["pipeline-3"],
+    "notes": "Post-meeting — pipeline-3 has 'meeting', 'action items', 'synthesis'"
+  },
+  {
+    "id": "eval-023",
+    "query": "upsell cross-sell renewal",
+    "queryType": "keyword",
+    "expectedTiles": ["ai-renewal-intelligence"],
+    "expectedIdeas": [],
+    "notes": "Upsell/cross-sell — renewal intelligence has 'upsell/cross-sell'"
+  },
+  {
+    "id": "eval-024",
+    "query": "agentic business reframe",
+    "queryType": "keyword",
+    "expectedTiles": ["csp-ask-ai-agentic-reframe"],
+    "expectedIdeas": [],
+    "notes": "Agentic reframe — exact name match"
+  },
+  {
+    "id": "eval-025",
+    "query": "value adoption plan blueprint",
+    "queryType": "keyword",
+    "expectedTiles": ["csp-ask-ai-value-adoption-plan", "value-melody-coach"],
+    "expectedIdeas": ["pipeline-8"],
+    "notes": "Value tracking — 'value adoption plan' exact match, 'blueprint' hits value melody"
+  },
+  {
+    "id": "eval-026",
+    "query": "CEG QBR",
+    "queryType": "keyword",
+    "expectedTiles": ["ceg-servicenow-pptx"],
+    "expectedIdeas": [],
+    "notes": "QBR deck — CEG QBR trigger"
+  },
+  {
+    "id": "eval-027",
+    "query": "EBC meeting prep brief",
+    "queryType": "keyword",
+    "expectedTiles": ["ai-coach-engage-meeting-prep", "contact-intelligence-profile"],
+    "expectedIdeas": [],
+    "notes": "EBC prep — meeting prep has 'EBC', contact profile has 'EBC' in useCase"
+  },
+  {
+    "id": "eval-028",
+    "query": "adoption gaps undeployed products",
+    "queryType": "keyword",
+    "expectedTiles": ["csp-ask-ai-adoption-gaps"],
+    "expectedIdeas": ["pipeline-10"],
+    "notes": "License utilization — adoption gaps has 'undeployed'"
+  },
+  {
+    "id": "eval-029",
+    "query": "weekly momentum 1:1 prep",
+    "queryType": "keyword",
+    "expectedTiles": ["weekly-momentum-checklist"],
+    "expectedIdeas": [],
+    "notes": "1:1 prep — '1:1 prep' and 'momentum' triggers"
+  },
+  {
+    "id": "eval-030",
+    "query": "account brief interlock",
+    "queryType": "keyword",
+    "expectedTiles": ["account-command-center"],
+    "expectedIdeas": ["pipeline-1"],
+    "notes": "Pre-interlock — command center has 'account', pipeline-1 has 'interlock'"
+  },
+  {
+    "id": "eval-031",
+    "query": "churn risk account health renewal",
+    "queryType": "keyword",
+    "expectedTiles": ["ai-renewal-intelligence", "account-command-center"],
+    "expectedIdeas": ["pipeline-5", "pipeline-9"],
+    "notes": "Churn risk — 'risk' + 'renewal' hits renewal intelligence, 'risk' hits pipelines"
+  },
+  {
+    "id": "eval-032",
+    "query": "expert chatbot knowledge base",
+    "queryType": "keyword",
+    "expectedTiles": ["es-genius"],
+    "expectedIdeas": ["pipeline-4"],
+    "notes": "Knowledge search — ES Genius has 'chatbot', pipeline-4 has 'content sources'"
+  },
+  {
+    "id": "eval-033",
+    "query": "support escalation cases trends",
+    "queryType": "keyword",
+    "expectedTiles": [],
+    "expectedIdeas": ["pipeline-9"],
+    "notes": "Support issues — pipeline-9 has 'support cases', 'escalations', 'trends'"
+  },
+  {
+    "id": "eval-034",
+    "query": "value blueprint BVA",
+    "queryType": "keyword",
+    "expectedTiles": ["value-melody-coach"],
+    "expectedIdeas": ["pipeline-8"],
+    "notes": "Value blueprint — value melody has 'BVA' trigger, pipeline-8 has 'blueprint'"
+  },
+  {
+    "id": "eval-035",
+    "query": "contact profile buying group stakeholders",
+    "queryType": "keyword",
+    "expectedTiles": ["contact-intelligence-profile"],
+    "expectedIdeas": [],
+    "notes": "Stakeholder — 'contact profile' and 'buying group' are triggers"
+  },
+  {
+    "id": "eval-036",
+    "query": "CRIR risk mitigation plan",
+    "queryType": "keyword",
+    "expectedTiles": [],
+    "expectedIdeas": ["pipeline-7"],
+    "notes": "CRIR mitigation — pipeline-7 has 'CRIR' and 'mitigation plan'"
+  },
+  {
+    "id": "eval-037",
+    "query": "pre-call brief talking points",
+    "queryType": "keyword",
+    "expectedTiles": ["ai-coach-engage-meeting-prep"],
+    "expectedIdeas": [],
+    "notes": "Pre-call brief — 'talking points' and 'brief' triggers"
+  },
+  {
+    "id": "eval-038",
+    "query": "escalations risk signals portfolio",
+    "queryType": "keyword",
+    "expectedTiles": [],
+    "expectedIdeas": ["pipeline-5"],
+    "notes": "Escalation dashboard — pipeline-5 has 'escalations', 'risk signals', 'portfolio'"
+  },
+  {
+    "id": "eval-039",
+    "query": "account lookup search",
+    "queryType": "keyword",
+    "expectedTiles": ["account-lookup", "account-command-center"],
+    "expectedIdeas": [],
+    "notes": "Account lookup — 'account' matches both, 'lookup' is in name"
+  },
+  {
+    "id": "eval-040",
+    "query": "sales handoff transition brief",
+    "queryType": "keyword",
+    "expectedTiles": ["sales-to-post-sale-brief", "csp-ask-ai-handoff-brief"],
+    "expectedIdeas": ["pipeline-1"],
+    "notes": "Sales-to-CS transition — 'handoff' and 'brief' match"
+  },
+  {
+    "id": "eval-041",
+    "query": "I need to prepare for a renewal conversation with my customer",
+    "queryType": "natural-language",
+    "expectedTiles": ["ai-renewal-intelligence"],
+    "expectedIdeas": [],
+    "minRecall": 0.5,
+    "notes": "Natural language — at minimum renewal advisor must appear (has 'renewal')"
+  },
+  {
+    "id": "eval-042",
+    "query": "my customer wants to understand the value they're getting from ServiceNow",
+    "queryType": "natural-language",
+    "expectedTiles": ["value-melody-analyst", "csp-ask-ai-value-adoption-plan"],
+    "expectedIdeas": ["pipeline-8"],
+    "minRecall": 0.5,
+    "notes": "Value question — 'value' keyword should hit value-related tiles"
+  },
+  {
+    "id": "eval-043",
+    "query": "I need to schedule a QBR with my customer",
+    "queryType": "natural-language",
+    "expectedTiles": [],
+    "expectedIdeas": ["pipeline-6"],
+    "minRecall": 0.5,
+    "notes": "Scheduling + QBR — 'schedule' should hit pipeline-6"
+  },
+  {
+    "id": "eval-044",
+    "query": "what is the health score of my account",
+    "queryType": "natural-language",
+    "expectedTiles": ["account-command-center", "csp-ask-ai-exec-summary"],
+    "expectedIdeas": [],
+    "minRecall": 0.5,
+    "notes": "Health score — 'account' + 'health' should match"
+  }
+]

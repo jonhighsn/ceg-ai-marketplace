@@ -5,11 +5,13 @@
     "type": "enterprise-skill",
     "status": "now",
     "cat": "Account Intelligence",
-    "desc": "Builds a dark-ops console HTML artifact with full account intelligence — contracts, health scores, pipeline, contacts, and more for any company.",
-    "useCase": "Before any customer engagement — get the complete account picture in a single artifact.",
+    "desc": "Builds a dark-ops console HTML artifact with full account intelligence — contracts, health scores, pipeline, contacts, and more for any company. Generates a comprehensive account brief and executive summary.",
+    "useCase": "Before any customer engagement — get the complete account picture in a single artifact. Use before interlock meetings, QBRs, or any time you need a quick account brief.",
     "triggers": [
       "account command center",
-      "account command center for"
+      "account command center for",
+      "account brief",
+      "interlock brief"
     ]
   },
   {
@@ -107,8 +109,8 @@
     "type": "enterprise-skill",
     "status": "now",
     "cat": "Value & Adoption",
-    "desc": "Primary workflow for creating value deliverables: business cases, SVPs, BVAs, and narratives. Controls workflow over the Analyst skill when both are loaded.",
-    "useCase": "After Value Melody data returns — use this to structure, format, and present the output correctly.",
+    "desc": "Primary workflow for creating value deliverables: business cases, SVPs, BVAs, value narratives, and value realization tracking. Controls workflow over the Analyst skill when both are loaded.",
+    "useCase": "After Value Melody data returns — use this to structure, format, and present the output correctly. Helps customers understand the value they are getting from ServiceNow.",
     "triggers": [
       "Value Melody",
       "Hey Melody",
@@ -309,8 +311,8 @@
     "type": "in-platform",
     "status": "now",
     "cat": "Value & Adoption",
-    "desc": "Generates a comprehensive Value Adoption Plan directly from Account 360 in CSP.",
-    "useCase": "To get a value adoption plan directly out of Acct360 in CSP.",
+    "desc": "Generates a comprehensive Value Adoption Plan directly from Account 360 in CSP. Shows value realization, adoption progress, and what value the customer is getting from ServiceNow.",
+    "useCase": "To get a value adoption plan directly out of Acct360 in CSP. Use when the customer wants to understand the value they are getting.",
     "url": "https://success.servicenow.com/now/cwf/agent/home"
   },
   {
