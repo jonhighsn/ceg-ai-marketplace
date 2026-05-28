@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { B, IDEA_STATUS_META, STORAGE_INTAKE_KEY, STORAGE_USER_VOTES_KEY, STORAGE_VOTES_KEY } from '../constants'
 import { normalizeIdeaStatus } from '../helpers'
+import { searchMarketplace } from '../search'
 import storage from '../storage'
 import { IdeaStatusBadge } from '../components/IdeaStatusBadge'
 import { TagPill } from '../components/TagPill'
@@ -11,6 +12,8 @@ const PageIdeaPortal = ({ ideas = [], tiles = [] }) => {
   const [tab, setTab] = useState("catalog");
   const [statusFilter, setStatusFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchedIdeas, setSearchedIdeas] = useState(null);
+  const [searchLoading, setSearchLoading] = useState(false);
   const [submissions, setSubmissions] = useState([]);
 
   // votes: { [ideaId]: count }  — shared across all users
@@ -53,14 +56,33 @@ const PageIdeaPortal = ({ ideas = [], tiles = [] }) => {
     return [..._ideas.map(i=>({...i,status:normalizeIdeaStatus(i.status)})), ...userIdeas];
   }, [submissions, _ideas]);
 
+  useEffect(() => {
+    let cancelled = false;
+
+    if (!searchQuery.trim()) {
+      return () => { cancelled = true };
+    }
+
+    (async () => {
+      const results = await searchMarketplace({
+        tiles,
+        ideas: allIdeas,
+        query: searchQuery,
+        scope: 'ideas',
+      });
+      if (!cancelled) {
+        setSearchedIdeas(results.ideas);
+        setSearchLoading(false);
+      }
+    })();
+
+    return () => { cancelled = true };
+  }, [allIdeas, searchQuery, tiles]);
+
   const filteredIdeas = useMemo(() => {
-    const byStatus = statusFilter === "all" ? allIdeas : allIdeas.filter(i => i.status === statusFilter);
-    if (!searchQuery.trim()) return byStatus;
-    const needle = searchQuery.trim().toLowerCase();
-    return byStatus.filter(i =>
-      [i.title, i.problem, i.category].some(f => (f||"").toLowerCase().includes(needle))
-    );
-  }, [allIdeas, statusFilter, searchQuery]);
+    const sourceIdeas = searchQuery.trim() ? (searchedIdeas || []) : allIdeas;
+    return statusFilter === "all" ? sourceIdeas : sourceIdeas.filter(i => i.status === statusFilter);
+  }, [allIdeas, statusFilter, searchQuery, searchedIdeas]);
 
   const statusCounts = useMemo(() => {
     const counts = {all: allIdeas.length};
@@ -103,13 +125,27 @@ const PageIdeaPortal = ({ ideas = [], tiles = [] }) => {
           {/* Search input */}
           <input
             value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
+            onChange={e => {
+              const nextQuery = e.target.value;
+              setSearchQuery(nextQuery);
+              if (!nextQuery.trim()) {
+                setSearchedIdeas(null);
+                setSearchLoading(false);
+              } else {
+                setSearchLoading(true);
+              }
+            }}
             placeholder="Search ideas by title, category, or description..."
             style={{width:"100%",padding:"10px 14px",fontSize:14,
               border:`1px solid ${B.border}`,borderRadius:8,
               fontFamily:"inherit",outline:"none",
               boxSizing:"border-box",background:B.white,marginBottom:14}}
           />
+          {searchLoading && (
+            <div style={{fontSize:12,color:B.dim,marginTop:-6,marginBottom:12}}>
+              Searching ideas...
+            </div>
+          )}
 
           {/* Status filter pills */}
           <div style={{display:"flex",gap:6,marginBottom:16,flexWrap:"wrap"}}>
@@ -204,7 +240,7 @@ const PageIdeaPortal = ({ ideas = [], tiles = [] }) => {
 
       {/* Submit tab */}
       {tab === "submit" && (
-        <DiscoverySubmit tiles={tiles} />
+        <DiscoverySubmit tiles={tiles} ideas={allIdeas} />
       )}
     </div>
   );

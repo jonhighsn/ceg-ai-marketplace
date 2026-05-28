@@ -157,7 +157,7 @@ const PageAdmin = ({ liveTiles, onCatalogUpdate, liveIdeas, onIdeasUpdate }) => 
       }
       await saveCatalogToGitHub(catalog, getCatalogSHA())
       onIdeasUpdate(CATALOG_FALLBACK.ideas)
-    } catch (e) { /* silent */ }
+    } catch { /* silent */ }
     setIdeasResetConfirm(false)
     setIdeasParsed(null); setIdeasDiff(null); setIdeasJsonText(''); setIdeasErr(null)
   }
@@ -297,7 +297,7 @@ const PageAdmin = ({ liveTiles, onCatalogUpdate, liveIdeas, onIdeasUpdate }) => 
       }
       await saveCatalogToGitHub(catalog, getCatalogSHA())
       onCatalogUpdate(CATALOG_FALLBACK.tiles)
-    } catch (e) { /* silent */ }
+    } catch { /* silent */ }
     setResetConfirm(false)
     setParsed(null); setDiff(null); setJsonText(''); setUploadErr(null)
   }

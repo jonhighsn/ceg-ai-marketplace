@@ -1,0 +1,84 @@
+import { describe, expect, it, vi } from 'vitest'
+import { searchMarketplace, searchTiles } from './search'
+
+const tiles = [
+  {
+    id: 'renewal',
+    name: 'AI Renewal Intelligence',
+    desc: 'Renewal advisor with risk assessment and outreach guidance.',
+    useCase: 'Renewal coming up.',
+    cat: 'Renewals',
+    triggers: ['renewal prep'],
+  },
+  {
+    id: 'handoff',
+    name: 'Sales-to-Post-Sale Brief',
+    desc: 'Creates a handoff brief for new customers.',
+    useCase: 'New logo just closed.',
+    cat: 'Account Intelligence',
+  },
+]
+
+const ideas = [
+  {
+    id: 'pipeline-1',
+    title: 'Pre-Interlock Intelligence Agent',
+    problem: 'Generates account brief for new account assignment.',
+    category: 'Account Intelligence',
+  },
+]
+
+describe('searchMarketplace', () => {
+  it('preserves keyword search for exact matches', () => {
+    const results = searchTiles(tiles, 'renewal')
+
+    expect(results[0].id).toBe('renewal')
+    expect(results[0].match.source).toBe('keyword')
+  })
+
+  it('ranks semantic matches that do not share exact query words', async () => {
+    const results = await searchMarketplace({
+      tiles,
+      ideas,
+      query: 'help me prepare for a renewal conversation',
+      semanticIndex: {
+        available: true,
+        entries: [
+          { id: 'renewal', kind: 'tile', embedding: [1, 0] },
+          { id: 'handoff', kind: 'tile', embedding: [0, 1] },
+          { id: 'pipeline-1', kind: 'idea', embedding: [0.8, 0.2] },
+        ],
+      },
+      embedQuery: vi.fn(async () => [1, 0]),
+    })
+
+    expect(results.mode).toBe('hybrid')
+    expect(results.tiles[0].id).toBe('renewal')
+    expect(results.tiles[0].match.source).toMatch(/hybrid|semantic/)
+    expect(results.ideas[0].id).toBe('pipeline-1')
+  })
+
+  it('falls back to keyword results when semantic search is unavailable', async () => {
+    const results = await searchMarketplace({
+      tiles,
+      ideas,
+      query: 'handoff',
+      semanticIndex: { available: false, reason: 'stale-index', entries: [] },
+      embedQuery: vi.fn(async () => {
+        throw new Error('should not embed')
+      }),
+    })
+
+    expect(results.mode).toBe('keyword')
+    expect(results.fallbackReason).toBe('stale-index')
+    expect(results.tiles[0].id).toBe('handoff')
+  })
+
+  it('does not load semantic search for very short queries', async () => {
+    const loadIndex = vi.fn()
+    const results = await searchMarketplace({ tiles, ideas, query: 'q', loadIndex })
+
+    expect(results.mode).toBe('empty')
+    expect(loadIndex).not.toHaveBeenCalled()
+  })
+})

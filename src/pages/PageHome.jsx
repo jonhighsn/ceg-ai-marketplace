@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { B, TYPE_META } from '../constants'
-import { searchTiles, searchIdeas } from '../search'
+import { searchMarketplace } from '../search'
 import { SNSearchCard } from '../components/SNSearchCard'
 import { SubLabel } from '../components/SubLabel'
 import { TileCard } from '../components/TileCard'
@@ -10,21 +10,24 @@ import { TagPill } from '../components/TagPill'
 const PageHome = ({ tiles = [], ideas = [] }) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState(null); // { tiles: [], ideas: [] }
+  const [loading, setLoading] = useState(false);
   const [selectedTile, setSelectedTile] = useState(null);
+  const searchRunRef = useRef(0);
 
   const featuredTiles = useMemo(() => {
     return tiles.filter(t => t.type === "in-platform" && t.status === "now");
   }, [tiles]);
 
-  // TODO: Replace with AI-powered semantic search via server proxy
-  // const searchAI = async () => { ... Anthropic API call ... }
-
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!query.trim()) return
-    setResults({
-      tiles: searchTiles(tiles, query),
-      ideas: searchIdeas(ideas, query),
-    })
+    const searchRun = searchRunRef.current + 1
+    searchRunRef.current = searchRun
+    setLoading(true)
+    const searchQuery = query
+    const nextResults = await searchMarketplace({ tiles, ideas, query: searchQuery })
+    if (searchRunRef.current !== searchRun) return
+    setResults(nextResults)
+    setLoading(false)
   };
 
   const matchedTiles = results?.tiles || []
@@ -42,9 +45,16 @@ const PageHome = ({ tiles = [], ideas = [] }) => {
         ]}
         placeholder="e.g. QBR, account intelligence, automation..."
         value={query}
-        onChange={e => { setQuery(e.target.value); if (results !== null) setResults(null); }}
+        onChange={e => {
+          searchRunRef.current += 1;
+          setLoading(false);
+          setQuery(e.target.value);
+          if (results !== null) setResults(null);
+        }}
         onSubmit={handleSearch}
+        loading={loading}
         submitLabel="Search →"
+        loadingLabel="Searching..."
       />
 
       {/* Search results */}
@@ -83,8 +93,8 @@ const PageHome = ({ tiles = [], ideas = [] }) => {
                           </div>
                           <div style={{fontSize:12.5, color:B.muted, lineHeight:1.5}}>{t.desc}</div>
                         </div>
-                        <TagPill color={t.confidence==="high"?"green":"teal"}>
-                          {t.confidence==="high"?"Best match":"Good match"}
+                        <TagPill color={t.match?.confidence==="best"?"green":"teal"}>
+                          {t.match?.label || (t.confidence==="high"?"Best match":"Good match")}
                         </TagPill>
                       </div>
                     ))}
@@ -119,7 +129,7 @@ const PageHome = ({ tiles = [], ideas = [] }) => {
                           </div>
                           <div style={{fontSize:12.5, color:B.muted, lineHeight:1.5}}>{i.problem}</div>
                         </div>
-                        <TagPill color="amber">{i.confidence==="high"?"In pipeline":"Related"}</TagPill>
+                        <TagPill color="amber">{i.match?.label || (i.confidence==="high"?"In pipeline":"Related")}</TagPill>
                       </div>
                     ))}
                   </div>
