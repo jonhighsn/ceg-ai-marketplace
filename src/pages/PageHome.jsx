@@ -151,24 +151,17 @@ const PageHome = ({ tiles = [], ideas = [] }) => {
         </div>
       )}
 
-      {/* Featured tiles + detail panel */}
-      <div className="detail-panel-container">
-        <div className="detail-panel-grid">
-          <div style={{marginBottom:8}}>
-            <SubLabel>In-Platform Capabilities</SubLabel>
-          </div>
-          <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:14}}>
-            {featuredTiles.map(t => (
-              <TileCard key={t.id} tile={t} onSelect={setSelectedTile} />
-            ))}
-          </div>
-        </div>
-        {selectedTile && (
-          <div className="detail-panel-enter">
-            <TilePanel tile={selectedTile} onClose={() => setSelectedTile(null)} />
-          </div>
-        )}
+      {/* Featured tiles */}
+      <div style={{marginBottom:8}}>
+        <SubLabel>In-Platform Capabilities</SubLabel>
       </div>
+      <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:14}}>
+        {featuredTiles.map(t => (
+          <TileCard key={t.id} tile={t} onSelect={setSelectedTile} />
+        ))}
+      </div>
+
+      {selectedTile && <TilePanel tile={selectedTile} onClose={() => setSelectedTile(null)} />}
     </div>
   );
 };

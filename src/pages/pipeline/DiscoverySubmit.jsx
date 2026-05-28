@@ -140,14 +140,7 @@ const DiscoverySubmit = ({ tiles = [], ideas = [] }) => {
         </div>
       )}
 
-      {selectedTile && (
-        <div className="detail-panel-container">
-          <div className="detail-panel-grid" />
-          <div className="detail-panel-enter">
-            <TilePanel tile={selectedTile} onClose={() => setSelectedTile(null)} />
-          </div>
-        </div>
-      )}
+      {selectedTile && <TilePanel tile={selectedTile} onClose={() => setSelectedTile(null)} />}
     </div>
   );
 };
