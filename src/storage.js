@@ -1,3 +1,5 @@
+import { STORAGE_GITHUB_PAT_KEY, STORAGE_CATALOG_SHA_KEY } from './constants'
+
 const storage = {
   async get(key, _shared = false) {
     void _shared
@@ -27,5 +29,10 @@ const storage = {
     }
   },
 }
+
+export const getGitHubPAT = () => localStorage.getItem(STORAGE_GITHUB_PAT_KEY)
+export const setGitHubPAT = (token) => localStorage.setItem(STORAGE_GITHUB_PAT_KEY, token)
+export const getCatalogSHA = () => localStorage.getItem(STORAGE_CATALOG_SHA_KEY)
+export const setCatalogSHA = (sha) => localStorage.setItem(STORAGE_CATALOG_SHA_KEY, sha)
 
 export default storage

@@ -1,6 +1,7 @@
 // AUTO-GENERATED -- do not edit manually.
-// Update public/data/tiles.json and public/data/ideas.json instead.
-export const TILES_FALLBACK = [
+// Update catalog.json on the data branch instead.
+
+const TILES_FALLBACK = [
   {
     "id": "account-command-center",
     "name": "Account Command Center",
@@ -347,7 +348,7 @@ export const TILES_FALLBACK = [
   }
 ]
 
-export const IDEAS_FALLBACK = [
+const IDEAS_FALLBACK = [
   {
     "id": "pipeline-1",
     "title": "Pre-Interlock Intelligence Agent",
@@ -419,3 +420,11 @@ export const IDEAS_FALLBACK = [
     "status": "committed"
   }
 ]
+
+export { TILES_FALLBACK, IDEAS_FALLBACK }
+
+export const CATALOG_FALLBACK = {
+  version: '2026-05-27T00:00:00Z',
+  tiles: TILES_FALLBACK,
+  ideas: IDEAS_FALLBACK,
+}
