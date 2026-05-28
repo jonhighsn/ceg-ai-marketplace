@@ -12,8 +12,7 @@ export const Sidebar = ({page, onPage}) => {
       flexDirection:"column", minHeight:"100vh", position:"sticky", top:0}}>
       {/* Logo */}
       <div style={{padding:"20px 18px 14px"}}>
-        <div style={{fontSize:10, fontWeight:700, letterSpacing:"2px",
-          textTransform:"uppercase", color:"rgba(255,255,255,0.45)", marginBottom:3}}>ServiceNow</div>
+        <img src="/ServiceNow_logo_RGB_White_WasabiGreen copy.png" alt="ServiceNow" style={{height:20, marginBottom:8}}/>
         <div style={{fontSize:15, fontWeight:700, color:"#fff", lineHeight:1.2}}>CEG AI Marketplace</div>
       </div>
 
