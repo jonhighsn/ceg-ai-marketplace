@@ -37,15 +37,12 @@ const PageHome = ({ tiles = [], ideas = [] }) => {
   return (
     <div>
       {/* Value prop */}
-      <div style={{marginBottom:20, display:"flex", gap:18, alignItems:"center"}}>
-        <img src="/ServiceNow_logo_RGB_BL_WasabiGreen copy.png" alt="ServiceNow" style={{height:36, flexShrink:0}}/>
-        <div>
-          <div style={{fontSize:26, fontWeight:800, color:B.text, lineHeight:1.15, marginBottom:6}}>
-            The right AI tool for every account, every task
-          </div>
-          <div style={{fontSize:14, color:B.muted, lineHeight:1.55, maxWidth:580}}>
-            Discover AI capabilities built for your role. Search by task, explore what's possible for your accounts, or shape what we build next.
-          </div>
+      <div style={{marginBottom:20}}>
+        <div style={{fontSize:26, fontWeight:800, color:B.text, lineHeight:1.15, marginBottom:6}}>
+          The right AI tool for every account, every task
+        </div>
+        <div style={{fontSize:14, color:B.muted, lineHeight:1.55, maxWidth:580}}>
+          Discover AI capabilities built for your role. Search by task, explore what's possible for your accounts, or shape what we build next.
         </div>
       </div>
 
