@@ -38,11 +38,13 @@ const PageHome = ({ tiles = [], ideas = [] }) => {
     <div>
       {/* Value prop */}
       <div style={{marginBottom:28}}>
-        <div style={{width:32, height:4, background:B.wasabi, borderRadius:2, marginBottom:14}} />
-        <div style={{fontSize:42, fontWeight:900, color:B.text, lineHeight:1.08, letterSpacing:"-0.02em", marginBottom:10}}>
-          The right AI tool for every account, every task
+        <div style={{display:"flex", alignItems:"center", gap:12, marginBottom:10}}>
+          <div style={{width:32, height:4, background:B.wasabi, borderRadius:2, flexShrink:0}} />
+          <div style={{fontSize:42, fontWeight:900, color:B.text, lineHeight:1.08, letterSpacing:"-0.02em"}}>
+            The right AI tool for every account, every task
+          </div>
         </div>
-        <div style={{fontSize:16, color:B.muted, lineHeight:1.6, maxWidth:680, fontWeight:400}}>
+        <div style={{fontSize:16, color:B.muted, lineHeight:1.6, fontWeight:400}}>
           Discover AI capabilities built for your role. Search by task, explore what's possible for your accounts, or shape what we build next.
         </div>
       </div>
