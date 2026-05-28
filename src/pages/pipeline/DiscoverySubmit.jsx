@@ -1,24 +1,29 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { B, SUBMIT_FORM_URL, TYPE_META } from '../../constants'
-import { searchTiles } from '../../search'
+import { searchMarketplace } from '../../search'
 import { SNSearchCard } from '../../components/SNSearchCard'
 import { TileModal } from '../../components/TileModal'
 
-const DiscoverySubmit = ({ tiles = [] }) => {
+const DiscoverySubmit = ({ tiles = [], ideas = [] }) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [selectedTile, setSelectedTile] = useState(null);
+  const searchRunRef = useRef(0);
 
   const matchedTiles = results || []
   const hasResults = matchedTiles.length > 0;
   const noResults = results !== null && matchedTiles.length === 0;
 
-  // TODO: Replace with AI-powered semantic search via server proxy
-  // const handleAI = async () => { ... Anthropic API call ... }
-
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!query.trim()) return
-    setResults(searchTiles(tiles, query))
+    const searchRun = searchRunRef.current + 1
+    searchRunRef.current = searchRun
+    setLoading(true)
+    const searchResults = await searchMarketplace({ tiles, ideas, query, scope: 'tiles' })
+    if (searchRunRef.current !== searchRun) return
+    setResults(searchResults.tiles)
+    setLoading(false)
   };
 
   return (
@@ -41,9 +46,16 @@ const DiscoverySubmit = ({ tiles = [] }) => {
         ]}
         placeholder="e.g. QBR deck, account data, automation..."
         value={query}
-        onChange={e => { setQuery(e.target.value); if (results !== null) setResults(null); }}
+        onChange={e => {
+          searchRunRef.current += 1;
+          setLoading(false);
+          setQuery(e.target.value);
+          if (results !== null) setResults(null);
+        }}
         onSubmit={handleSearch}
+        loading={loading}
         submitLabel="Check Catalog →"
+        loadingLabel="Checking..."
       />
 
       {/* Matches found */}
@@ -76,7 +88,7 @@ const DiscoverySubmit = ({ tiles = [] }) => {
                       letterSpacing:"0.3px",textTransform:"uppercase",
                       background:t.confidence==="high"?"rgba(99,223,78,0.14)":"rgba(129,181,161,0.15)",
                       color:t.confidence==="high"?"#1a6010":"#2d6a57"}}>
-                      {t.confidence==="high"?"Best match":"Good match"}
+                      {t.match?.label || (t.confidence==="high"?"Best match":"Good match")}
                     </span>
                   </div>
                   <div style={{fontSize:13,color:B.muted,lineHeight:1.55}}>{t.desc}</div>
