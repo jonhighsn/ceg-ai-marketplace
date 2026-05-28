@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { B, TYPE_META } from '../constants'
 import { filterCatalogByQuery, groupTilesByCategory, sortCatalogTiles } from '../helpers'
 import { TileCard } from '../components/TileCard'
-import { TileModal } from '../components/TileModal'
+import { TilePanel } from '../components/TilePanel'
 
 const CATALOG_TYPES = ["all", "in-platform", "enterprise-skill", "local-skill"];
 
@@ -64,32 +64,39 @@ const PageBrowse = ({ tiles = [] }) => {
 
       </div>
 
-      {/* Tile grid */}
-      {filtered.length > 0 ? (
-        <div>
-          {grouped.map(({ category, tiles: catTiles }) => (
-            <div key={category} style={{marginBottom:20}}>
-              <div style={{fontSize:13, fontWeight:700, color:B.snGreen, letterSpacing:"0.5px",
-                textTransform:"uppercase", marginBottom:10, paddingBottom:6,
-                borderBottom:`1px solid ${B.border}`}}>
-                {category}
-              </div>
-              <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:14}}>
-                {catTiles.map(t => <TileCard key={t.id} tile={t} onSelect={setSelectedTile} />)}
-              </div>
+      {/* Tile grid + detail panel */}
+      <div className="detail-panel-container">
+        <div className="detail-panel-grid">
+          {filtered.length > 0 ? (
+            <div>
+              {grouped.map(({ category, tiles: catTiles }) => (
+                <div key={category} style={{marginBottom:20}}>
+                  <div style={{fontSize:13, fontWeight:700, color:B.snGreen, letterSpacing:"0.5px",
+                    textTransform:"uppercase", marginBottom:10, paddingBottom:6,
+                    borderBottom:`1px solid ${B.border}`}}>
+                    {category}
+                  </div>
+                  <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:14}}>
+                    {catTiles.map(t => <TileCard key={t.id} tile={t} onSelect={setSelectedTile} />)}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          ) : (
+            <div style={{textAlign:"center", padding:"40px 20px",
+              background:B.white, border:`1px solid ${B.border}`, borderRadius:10}}>
+              <div style={{fontSize:32, marginBottom:12}}>🔍</div>
+              <div style={{fontSize:15, fontWeight:600, color:B.text, marginBottom:6}}>No capabilities match this filter</div>
+              <div style={{fontSize:13, color:B.muted}}>Try a different type or role filter</div>
+            </div>
+          )}
         </div>
-      ) : (
-        <div style={{textAlign:"center", padding:"40px 20px",
-          background:B.white, border:`1px solid ${B.border}`, borderRadius:10}}>
-          <div style={{fontSize:32, marginBottom:12}}>🔍</div>
-          <div style={{fontSize:15, fontWeight:600, color:B.text, marginBottom:6}}>No capabilities match this filter</div>
-          <div style={{fontSize:13, color:B.muted}}>Try a different type or role filter</div>
-        </div>
-      )}
-
-      {selectedTile && <TileModal tile={selectedTile} onClose={() => setSelectedTile(null)} />}
+        {selectedTile && (
+          <div className="detail-panel-enter">
+            <TilePanel tile={selectedTile} onClose={() => setSelectedTile(null)} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
